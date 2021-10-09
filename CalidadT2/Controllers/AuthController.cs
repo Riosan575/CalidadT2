@@ -20,6 +20,8 @@ namespace CalidadT2.Controllers
 
         public AuthController(IAuthRepository repository, IAuthService AuthService,AppBibliotecaContext app)
         {
+            this.repository = repository;
+            this.AuthService = AuthService;
             this.app = app;
         }
 
@@ -39,7 +41,9 @@ namespace CalidadT2.Controllers
                 {
                     new Claim(ClaimTypes.Name, username)
                 };
-                
+
+                AuthService.Login(claims);
+
                 return RedirectToAction("Index", "Home");
             }
             

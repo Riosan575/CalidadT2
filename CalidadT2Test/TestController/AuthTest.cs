@@ -24,7 +24,6 @@ namespace CalidadT2Test.TestController
             var result = controller.Login("admin", "1234") as ViewResult;
 
             Assert.IsInstanceOf<ViewResult>(result);
-            Assert.IsFalse(controller.ModelState.IsValid);
         }
         [Test]
         public void TestLoginPostSuccess()
