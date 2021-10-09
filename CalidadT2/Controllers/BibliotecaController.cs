@@ -37,7 +37,6 @@ namespace CalidadT2.Controllers
         {
             var user = repository.LoggedUser();
             repository.AddBiblioteca(libro,user.Id);
-            TempData["SuccessMessage"] = "Se añádio el libro a su biblioteca";
 
             return RedirectToAction("Index", "Home");
         }
@@ -49,7 +48,7 @@ namespace CalidadT2.Controllers
 
             repository.MarcarComoLeyendo(libroId,user.Id);
 
-            TempData["SuccessMessage"] = "Se marco como leyendo el libro";
+            //TempData["SuccessMessage"] = "Se marco como leyendo el libro";
 
             return RedirectToAction("Index");
         }
@@ -61,7 +60,7 @@ namespace CalidadT2.Controllers
 
             repository.MarcarComoLeyendo(libroId, user.Id);
 
-            TempData["SuccessMessage"] = "Se marco como leyendo el libro";
+            //TempData["SuccessMessage"] = "Se marco como leyendo el libro";
 
             return RedirectToAction("Index");
         }
