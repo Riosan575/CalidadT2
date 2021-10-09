@@ -12,9 +12,10 @@ namespace CalidadT2.Controllers
         private readonly ILibroRepository repository;
         private readonly AppBibliotecaContext app;
 
-        public LibroController(AppBibliotecaContext app)
+        public LibroController(AppBibliotecaContext app, ILibroRepository repository)
         {
             this.app = app;
+            this.repository = repository;
         }
 
         [HttpGet]

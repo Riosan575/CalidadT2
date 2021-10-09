@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace CalidadT2.Repositories
 {
-    public interface IAuthRepositorie
+    public interface IAuthRepository
     {
         void Login(List<Claim> claims);
 
         void Logout();
     }
-    public class AuthRepository : IAuthRepositorie
+    public class AuthRepository : IAuthRepository
     {
         private static HttpContext httpContext => new HttpContextAccessor().HttpContext;
 

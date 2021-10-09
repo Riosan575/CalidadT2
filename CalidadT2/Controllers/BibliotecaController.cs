@@ -26,13 +26,8 @@ namespace CalidadT2.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            Usuario user = LoggedUser();
-
-            var model = app.Bibliotecas
-                .Include(o => o.Libro.Autor)
-                .Include(o => o.Usuario)
-                .Where(o => o.UsuarioId == user.Id)
-                .ToList();
+            var user = repository.LoggedUser();
+            var model = repository.VerBiblioteca(user.Id);
 
             return View(model);
         }
@@ -40,7 +35,7 @@ namespace CalidadT2.Controllers
         [HttpGet]
         public ActionResult Add(int libro)
         {
-            Usuario user = LoggedUser();
+            var user = repository.LoggedUser();
             repository.AddBiblioteca(libro,user.Id);
             TempData["SuccessMessage"] = "Se añádio el libro a su biblioteca";
 
@@ -50,14 +45,9 @@ namespace CalidadT2.Controllers
         [HttpGet]
         public ActionResult MarcarComoLeyendo(int libroId)
         {
-            Usuario user = LoggedUser();
+            var user = repository.LoggedUser();
 
-            var libro = app.Bibliotecas
-                .Where(o => o.LibroId == libroId && o.UsuarioId == user.Id)
-                .FirstOrDefault();
-
-            libro.Estado = ESTADO.LEYENDO;
-            app.SaveChanges();
+            repository.MarcarComoLeyendo(libroId,user.Id);
 
             TempData["SuccessMessage"] = "Se marco como leyendo el libro";
 
@@ -67,14 +57,9 @@ namespace CalidadT2.Controllers
         [HttpGet]
         public ActionResult MarcarComoTerminado(int libroId)
         {
-            Usuario user = LoggedUser();
+            var user = repository.LoggedUser();
 
-            var libro = app.Bibliotecas
-                .Where(o => o.LibroId == libroId && o.UsuarioId == user.Id)
-                .FirstOrDefault();
-
-            libro.Estado = ESTADO.TERMINADO;
-            app.SaveChanges();
+            repository.MarcarComoLeyendo(libroId, user.Id);
 
             TempData["SuccessMessage"] = "Se marco como leyendo el libro";
 
