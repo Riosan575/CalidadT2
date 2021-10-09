@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CalidadT2.Constantes;
 using CalidadT2.Models;
+using CalidadT2.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,12 @@ namespace CalidadT2.Controllers
     [Authorize]
     public class BibliotecaController : Controller
     {
+        private readonly IBliotecaRepository repository;
         private readonly AppBibliotecaContext app;
 
-        public BibliotecaController(AppBibliotecaContext app)
+        public BibliotecaController(IBliotecaRepository repository, AppBibliotecaContext app)
         {
+            this.repository = repository;
             this.app = app;
         }
 

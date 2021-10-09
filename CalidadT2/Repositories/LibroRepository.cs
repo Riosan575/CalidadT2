@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CalidadT2.Repositories
 {
-    public class AuthRepositorie
+    public class LibroRepository
     {
     }
 }

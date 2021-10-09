@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalidadT2", "CalidadT2\CalidadT2.csproj", "{75C34E5D-C0B5-4246-BB7F-C8332992443A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalidadT2Test", "CalidadT2Test\CalidadT2Test.csproj", "{74980D45-85F0-4A3B-B57A-505682590C7C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75C34E5D-C0B5-4246-BB7F-C8332992443A} = {75C34E5D-C0B5-4246-BB7F-C8332992443A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
