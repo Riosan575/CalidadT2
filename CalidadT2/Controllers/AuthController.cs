@@ -18,7 +18,7 @@ namespace CalidadT2.Controllers
         private readonly IAuthService AuthService;
         private readonly AppBibliotecaContext app;
 
-        public AuthController(AppBibliotecaContext app)
+        public AuthController(IAuthRepository repository, IAuthService AuthService,AppBibliotecaContext app)
         {
             this.app = app;
         }

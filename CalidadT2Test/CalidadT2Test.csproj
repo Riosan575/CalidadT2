@@ -14,4 +14,12 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestRepositorios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CalidadT2\CalidadT2.csproj" />
+  </ItemGroup>
+
 </Project>
