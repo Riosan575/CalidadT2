@@ -28,24 +28,17 @@ namespace CalidadT2.Controllers
         [HttpPost]
         public IActionResult AddComentario(Comentario comentario)
         {
-            Usuario user = LoggedUser();
-            comentario.UsuarioId = user.Id;
-            comentario.Fecha = DateTime.Now;
-            app.Comentarios.Add(comentario);
-
-            var libro = app.Libros.Where(o => o.Id == comentario.LibroId).FirstOrDefault();
-            libro.Puntaje = (libro.Puntaje + comentario.Puntaje) / 2;
-
-            app.SaveChanges();
+            var user = repository.LoggedUser();
+            repository.AddComentario(comentario,user.Id);
 
             return RedirectToAction("Details", new { id = comentario.LibroId });
         }
 
-        private Usuario LoggedUser()
-        {
-            var claim = HttpContext.User.Claims.FirstOrDefault();
-            var user = app.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
-            return user;
-        }
+        //private Usuario LoggedUser()
+        //{
+        //    var claim = HttpContext.User.Claims.FirstOrDefault();
+        //    var user = app.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
+        //    return user;
+        //}
     }
 }

@@ -11,10 +11,12 @@ namespace CalidadT2.Repositories
     public interface ILibroRepository
     {
         public Libro Details(int id);
-        public void AddComentario(Comentario comentario);
+        public void AddComentario(Comentario comentario, int userId);
+        public Usuario LoggedUser();
     }
     public class LibroRepository: ILibroRepository
     {
+        private HttpContext httpcontext;
         private readonly AppBibliotecaContext context;
 
         public LibroRepository(AppBibliotecaContext context)
@@ -31,9 +33,22 @@ namespace CalidadT2.Repositories
 
             return model;
         }
-        public void AddComentario(Comentario comentario)
+        public void AddComentario(Comentario comentario, int userId)
         {
-            throw new NotImplementedException();
-        } 
+            comentario.UsuarioId = userId;
+            comentario.Fecha = DateTime.Now;
+            context.Comentarios.Add(comentario);
+
+            var libro = context.Libros.Where(o => o.Id == comentario.LibroId).FirstOrDefault();
+            libro.Puntaje = (libro.Puntaje + comentario.Puntaje) / 2;
+
+            context.SaveChanges();
+        }
+        public Usuario LoggedUser()
+        {
+            var claim = httpcontext.User.Claims.FirstOrDefault();
+            var user = context.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
+            return user;
+        }
     }
 }

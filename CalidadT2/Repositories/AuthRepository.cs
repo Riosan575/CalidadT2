@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using CalidadT2.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -11,25 +12,19 @@ namespace CalidadT2.Repositories
 {
     public interface IAuthRepository
     {
-        void Login(List<Claim> claims);
-
-        void Logout();
+        Usuario Login(string username, string password);
     }
     public class AuthRepository : IAuthRepository
     {
-        private static HttpContext httpContext => new HttpContextAccessor().HttpContext;
+        private readonly AppBibliotecaContext context;
 
-        public void Login(List<Claim> claims)
+        public AuthRepository(AppBibliotecaContext context)
         {
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-            httpContext.SignInAsync(claimsPrincipal);
+            this.context = context;
         }
-
-        public void Logout()
+        public Usuario Login(string username, string password)
         {
-            httpContext.SignOutAsync();
+            return context.Usuarios.Where(o => o.Username == username && o.Password == password).FirstOrDefault();
         }
     }
 }

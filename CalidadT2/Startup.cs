@@ -41,6 +41,7 @@ namespace CalidadT2
             services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<IBliotecaRepository, BibliotecaRepository>();
             services.AddTransient<ILibroRepository, LibroRepository>();
+            services.AddTransient<IHomeRepository, HomeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

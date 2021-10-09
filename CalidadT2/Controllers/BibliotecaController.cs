@@ -66,11 +66,11 @@ namespace CalidadT2.Controllers
             return RedirectToAction("Index");
         }
 
-        private Usuario LoggedUser()
-        {
-            var claim = HttpContext.User.Claims.FirstOrDefault();
-            var user = app.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
-            return user;
-        }
+        //private Usuario LoggedUser()
+        //{
+        //    var claim = HttpContext.User.Claims.FirstOrDefault();
+        //    var user = app.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
+        //    return user;
+        //}
     }
 }
