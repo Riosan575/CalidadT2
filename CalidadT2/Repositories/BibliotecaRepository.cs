@@ -10,11 +10,9 @@ namespace CalidadT2.Repositories
 {
     public interface IBliotecaRepository
     {
-        public Biblioteca Add(int libro);
+        public void AddBiblioteca(int libro, int id);
         public void MarcarComoLeyendo(int libroId);
         public void MarcarComoTerminado(int libroId);
-        public Usuario LoggedUser();
-
     }
     public class BibliotecaRepository : IBliotecaRepository
     {
@@ -24,18 +22,17 @@ namespace CalidadT2.Repositories
         {
             this.context = context;
         }
-        public Biblioteca Add(int libro)
-        {
-            Usuario user = LoggedUser();
-
+        public void AddBiblioteca(int libro, int id)
+        {          
             var biblioteca = new Biblioteca
             {
                 LibroId = libro,
-                UsuarioId = user.Id,
+                UsuarioId = id,
                 Estado = ESTADO.POR_LEER
             };
 
-            return biblioteca;
+            context.Bibliotecas.Add(biblioteca);
+            context.SaveChanges();
 
         }
 
@@ -47,12 +44,6 @@ namespace CalidadT2.Repositories
         public void MarcarComoTerminado(int libroId)
         {
             throw new NotImplementedException();
-        }
-        public Usuario LoggedUser()
-        {
-            var claim = HttpContext.User.Claims.FirstOrDefault();
-            var user = context.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
-            return user;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace CalidadT2.Repositories
     {
         public Libro Details(int id);
         public void AddComentario(Comentario comentario);
-        public Usuario LoggedUser();
     }
     public class LibroRepository: ILibroRepository
     {
@@ -35,13 +34,6 @@ namespace CalidadT2.Repositories
         public void AddComentario(Comentario comentario)
         {
             throw new NotImplementedException();
-        }        
-
-        public Usuario LoggedUser()
-        {
-            var claim = HttpContext.User.Claims.FirstOrDefault();
-            var user = context.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
-            return user;
-        }
+        } 
     }
 }
