@@ -40,18 +40,9 @@ namespace CalidadT2.Controllers
         [HttpGet]
         public ActionResult Add(int libro)
         {
-            Usuario user = LoggedUser();
-
-            var biblioteca = new Biblioteca
-            {
-                LibroId = libro,
-                UsuarioId = user.Id,
-                Estado = ESTADO.POR_LEER
-            };
-
-            app.Bibliotecas.Add(biblioteca);
+            var add = repository.Add(libro);
+            app.Bibliotecas.Add(add);
             app.SaveChanges();
-
             TempData["SuccessMessage"] = "Se añádio el libro a su biblioteca";
 
             return RedirectToAction("Index", "Home");

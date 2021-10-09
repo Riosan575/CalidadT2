@@ -1,11 +1,47 @@
-﻿using System;
+﻿using CalidadT2.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CalidadT2.Repositories
 {
-    public class LibroRepository
+    public interface ILibroRepository
     {
+        public Libro Details(int id);
+        public void AddComentario(Comentario comentario);
+        public Usuario LoggedUser();
+    }
+    public class LibroRepository: ILibroRepository
+    {
+        private readonly AppBibliotecaContext context;
+
+        public LibroRepository(AppBibliotecaContext context)
+        {
+            this.context = context;
+        }
+        public Libro Details(int id)
+        {
+            var model = context.Libros
+                .Include("Autor")
+                .Include("Comentarios.Usuario")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
+
+            return model;
+        }
+        public void AddComentario(Comentario comentario)
+        {
+            throw new NotImplementedException();
+        }        
+
+        public Usuario LoggedUser()
+        {
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = context.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
+            return user;
+        }
     }
 }

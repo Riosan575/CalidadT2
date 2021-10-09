@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CalidadT2.Models;
+using CalidadT2.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace CalidadT2.Controllers
 {
     public class LibroController : Controller
     {
+        private readonly ILibroRepository repository;
         private readonly AppBibliotecaContext app;
 
         public LibroController(AppBibliotecaContext app)
@@ -18,11 +20,7 @@ namespace CalidadT2.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var model = app.Libros
-                .Include("Autor")
-                .Include("Comentarios.Usuario")
-                .Where(o => o.Id == id)
-                .FirstOrDefault();
+            var model = repository.Details(id);
             return View(model);
         }
 

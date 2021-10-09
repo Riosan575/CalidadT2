@@ -15,7 +15,7 @@ namespace CalidadT2.Repositories
 
         void Logout();
     }
-    public class AuthRepositorie : IAuthRepositorie
+    public class AuthRepository : IAuthRepositorie
     {
         private static HttpContext httpContext => new HttpContextAccessor().HttpContext;
 

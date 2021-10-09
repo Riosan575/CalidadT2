@@ -17,7 +17,7 @@ namespace CalidadT2.Repositories
 
     }
     public class BibliotecaRepository : IBliotecaRepository
-    {        
+    {
         private readonly AppBibliotecaContext context;
 
         public BibliotecaRepository(AppBibliotecaContext context)
@@ -36,8 +36,8 @@ namespace CalidadT2.Repositories
             };
 
             return biblioteca;
-            
-        }       
+
+        }
 
         public void MarcarComoLeyendo(int libroId)
         {
